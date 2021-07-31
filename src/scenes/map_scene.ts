@@ -54,7 +54,7 @@ export class MapScene {
         const addButtons = true
 
         const halfSize = 50
-        const distanceBetweenPlane = +15
+        const distanceBetweenPlane = 25
         let planeCount = 0
         // const plane1Resolution = 512
 
@@ -156,7 +156,7 @@ export class MapScene {
         texture_HeatMap.hasAlpha = true
 
         const material_HeatMap = new StandardMaterial('plane1 material', this._scene)
-        material_HeatMap.backFaceCulling = false // Needs to be true to have alpha working (https://doc.babylonjs.com/divingDeeper/materials/advanced/transparent_rendering)
+        material_HeatMap.backFaceCulling = false
         material_HeatMap.diffuseTexture = texture_HeatMap
         // materialPlane1.useAlphaFromDiffuseTexture = true
         // materialPlane1.useSpecularOverAlpha = true
@@ -229,22 +229,9 @@ export class MapScene {
             pixheight = image_FixedPix.naturalHeight
             pixwidth_text = pixwidth.toString()
             pixheight_text = pixheight.toString()
-            context_FixedPix.drawImage(image_FixedPix, 0, 0, pixwidth, pixheight, 0, 0, 2*halfSize, 2*halfSize)
+            context_FixedPix.drawImage(image_FixedPix, 0, 0, pixwidth, pixheight, 0, 0, 2 * halfSize, 2 * halfSize)
             texture_FixedPix.update(false)  // false = do not use invertY
         })
-
-        // //
-        // // RAINBOW PLANE
-        // //
-        // planeCount += 1
-
-        // const material_Rainbow = new SampleMaterial('material2', this._scene)
-        // material_Rainbow.backFaceCulling = false
-
-        // const plane_Rainbow = MeshBuilder.CreatePlane('mesh2', { width: 50, height: 50 }, this._scene)
-        // plane_Rainbow.material = material_Rainbow
-        // plane_Rainbow.rotation = new Vector3(Math.PI / 2, 0, 0)
-        // plane_Rainbow.position = new Vector3(0, planeCount * distanceBetweenPlane, 0)
 
 
         //
@@ -265,19 +252,20 @@ export class MapScene {
         const ratio = planeTextHeight / DTextHeight
 
         // Set text
-        const text = 'Fixed Pix size: width=' + pixwidth_text + ' x height=' + pixheight_text
+        // const text = 'Fixed Pix size: width=' + pixwidth_text + ' x height=' + pixheight_text
+        const text = 'Top heatmap'
 
         // Use a temporay dynamic texture to calculate the length of the text on the dynamic texture canvas
         const texture_Text = new DynamicTexture('DynamicTexture', {}, this._scene, false)
         const context_Text = texture_Text.getContext()
         context_Text.font = font
-        const DTWidth = context_Text.measureText(text).width + 8
+        const textPlane_Width = context_Text.measureText(text).width + 8
 
         // Calculate width the plane has to be
-        const planeWidth = DTWidth * ratio
+        const planeWidth = textPlane_Width * ratio
 
         // Create dynamic texture and write the text
-        const dynamicTexture_Text = new DynamicTexture('DynamicTexture', { width: DTWidth, height: DTextHeight }, this._scene, false)
+        const dynamicTexture_Text = new DynamicTexture('DynamicTexture', { width: textPlane_Width, height: DTextHeight }, this._scene, false)
         const material_DynText = new StandardMaterial('mat', this._scene)
         material_DynText.diffuseTexture = dynamicTexture_Text
         material_DynText.backFaceCulling = false
@@ -286,13 +274,17 @@ export class MapScene {
         // Create plane and set dynamic texture as material
         const plane_Text = MeshBuilder.CreatePlane('plane', { width: planeWidth, height: planeTextHeight }, this._scene)
         plane_Text.rotation = new Vector3(0, -Math.PI / 2, 0)
-        plane_Text.position = new Vector3(0, planeCount * distanceBetweenPlane, 0)
+        plane_Text.position = new Vector3(
+            halfSize,
+            (planeCount - 1) * distanceBetweenPlane - planeTextHeight/2,
+            -(halfSize - planeWidth / 2))
         plane_Text.material = material_DynText
 
+
+        //
+        // ADD UP/DOWN BUTTON
+        //
         if (addButtons) {
-            //
-            // ADD UP/DOWN BUTTON
-            //
             const buttonUp = document.createElement('button')
             buttonUp.style.top = '100px'
             buttonUp.style.right = '30px'
