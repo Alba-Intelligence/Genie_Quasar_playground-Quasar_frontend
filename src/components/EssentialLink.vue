@@ -14,6 +14,10 @@
 </template>
 
 <script lang="ts">
+//
+// This templaate is a generic mini-template that creates the left hand side
+// list of links.
+//
 import { defineComponent } from 'vue';
 
 export default defineComponent({

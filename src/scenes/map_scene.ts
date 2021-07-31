@@ -199,24 +199,7 @@ export class MapScene {
         })
 
 
-        // const image_HeatMap = new Image()
-        // image_HeatMap.src = plane_HeatMap.name
-
-        // const context_HeatMap = texture_HeatMap.getContext()
-        // context_HeatMap.drawImage(image_HeatMap, 0, 0)
-        // texture_HeatMap.update()
-
-
-        // // Our built-in 'sphere' shape. Params: name, subdivs, size, scene
-        // var sphere = MeshBuilder.CreateSphere('sphere', { segments: 16, diameter: 20 }, this._scene)
-
-        // // Move the sphere upward 1/2 its height
-        // sphere.position.y = 25
-
-
-
         // IMAGE PLANE (NO ALPHA)
-
         planeCount += 1
 
         const texture_FixedPix = new DynamicTexture('No alpha', { width: 2 * halfSize, height: 2 * halfSize }, this._scene, false)
@@ -347,12 +330,12 @@ export class MapScene {
             })
         }
 
-        // void this._scene.debugLayer.show({
-        //     // embedMode: true,
-        //     showInspector: true,
-        //     // overlay: true,
-        //     showExplorer: true
-        // })
+        void this._scene.debugLayer.show({
+            // embedMode: true,
+            showInspector: true,
+            // overlay: true,
+            showExplorer: true
+        })
 
     }
 

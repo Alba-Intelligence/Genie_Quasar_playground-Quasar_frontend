@@ -20,9 +20,6 @@ module.exports = configure(function (ctx) {
           files:
             [
               './src/**/*.{ts,tsx,js,jsx,vue}',
-              './src/scenes/*.{ts,tsx,js,jsx,vue}',
-              './src/Assets/*.*',
-              './src/Assets/Images/*.{png,jpg,jpeg,gif,svg}',
             ]
         },
       }

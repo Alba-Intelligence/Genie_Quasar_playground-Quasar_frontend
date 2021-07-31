@@ -1,10 +1,6 @@
 import { store } from 'quasar/wrappers'
 import { InjectionKey } from 'vue'
-import {
-  createStore,
-  Store as VuexStore,
-  useStore as vuexUseStore,
-} from 'vuex'
+import { createStore, Store as VuexStore, useStore as vuexUseStore, } from 'vuex'
 
 // import example from './module-example'
 // import { ExampleStateInterface } from './module-example/state';
