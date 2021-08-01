@@ -27,7 +27,8 @@
     "@typescript-eslint/parser": "^4.16.1",
     "eslint": "^7.14.0",
     "eslint-config-prettier": "^8.1.0",
-    "eslint-plugin-vue": "^7.0.0"
+    "eslint-plugin-vue": "^7.0.0",
+    "strip-ansi": "=3.0.1"
   },
   "browserslist": [
     "last 10 Chrome versions",
