@@ -1,6 +1,6 @@
 <template>
   <q-page class="row items-center justify-evenly">
-    <canvas ref="bjsCanvas" class="full-width full-height" />
+    <canvas ref="babylonCanvas" class="full-width full-height" />
   </q-page>
 </template>
 
@@ -13,11 +13,14 @@ import { MapScene } from 'src/scenes/map_scene';
 export default defineComponent({
   name: 'MapMockup',
   setup() {
-    const bjsCanvas = ref<HTMLCanvasElement | null>(null);
+    // Address the possibility that null is returned to make eslint happy.
+    const babylonCanvas = ref<HTMLCanvasElement | null>(null);
     let engine: Engine;
     onMounted(() => {
-      if (bjsCanvas?.value) {
-        const myMapScene = new MapScene(bjsCanvas.value);
+
+      // Interrogation mark in case the canvas is not available (null received)
+      if (babylonCanvas?.value) {
+        const myMapScene = new MapScene(babylonCanvas.value);
         engine = myMapScene.getEngine();
         myMapScene.initScene();
         myMapScene.startScene();
@@ -39,52 +42,9 @@ export default defineComponent({
     };
 
     return {
-      bjsCanvas,
+      babylonCanvas,
     };
   },
 });
 
-//
-// ORIGINAL FROM QUASAR TEMPLATE
-//
-//
-//       <!-- :todos="todos"
-//      :meta="meta" -->
-//
-// import { Todo, Meta } from 'components/models'
-// import ExampleComponent from 'components/CompositionComponent.vue'
-//
-//
-// export default defineComponent({
-//   name: 'PageIndex',
-//   components: { ExampleComponent },
-//   setup() {
-//     const todos = ref<Todo[]>([
-//       {
-//         id: 1,
-//         content: 'ct1',
-//       },
-//       {
-//         id: 2,
-//         content: 'ct2',
-//       },
-//       {
-//         id: 3,
-//         content: 'ct3',
-//       },
-//       {
-//         id: 4,
-//         content: 'ct4',
-//       },
-//       {
-//         id: 5,
-//         content: 'ct5',
-//       },
-//     ]);
-//     const meta = ref<Meta>({
-//       totalCount: 1200,
-//     });
-//     return { todos, meta };
-//   },
-// });
 </script>

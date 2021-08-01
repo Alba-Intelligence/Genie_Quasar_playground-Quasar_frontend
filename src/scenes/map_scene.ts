@@ -276,7 +276,7 @@ export class MapScene {
         plane_Text.rotation = new Vector3(0, -Math.PI / 2, 0)
         plane_Text.position = new Vector3(
             halfSize,
-            (planeCount - 1) * distanceBetweenPlane - planeTextHeight/2,
+            (planeCount - 1) * distanceBetweenPlane - planeTextHeight / 2,
             -(halfSize - planeWidth / 2))
         plane_Text.material = material_DynText
 
