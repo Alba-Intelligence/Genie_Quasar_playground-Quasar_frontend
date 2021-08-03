@@ -40,7 +40,7 @@ export class MapScene {
         //
         // Create a basic BJS Scene object.
         //
-        const camera = new ArcRotateCamera('camera1', 0, 0, 150, Vector3.Zero(), this._scene)
+        const camera = new ArcRotateCamera('camera1', 0, 0, 1000, Vector3.Zero(), this._scene)
         camera.position = new Vector3(150, 100, 0)
 
         // Attach the camera to the canvas.
@@ -53,7 +53,8 @@ export class MapScene {
 
         const addButtons = true
 
-        const halfSize = 50
+        const XhalfSize = 100
+        const ZhalfSize = 50
         const distanceBetweenPlane = 25
         let planeCount = 0
         // const plane1Resolution = 512
@@ -65,8 +66,8 @@ export class MapScene {
 
         // Part 1 : Creation of Tiled Ground
         // Parameters
-        const xmin = -halfSize, zmin = -halfSize
-        const xmax = halfSize, zmax = halfSize
+        const xmin = -XhalfSize, xmax = XhalfSize
+        const zmin = -ZhalfSize, zmax = ZhalfSize
 
         const precision = { 'w': 2, 'h': 2 }
         const subdivisions = { 'h': 8, 'w': 8 }
@@ -83,6 +84,7 @@ export class MapScene {
             }, this._scene)
 
         tiledGround_GroundMap.position = new Vector3(0, 0, 0)
+        tiledGround_GroundMap.rotation = new Vector3(0, -Math.PI / 2, 0)
 
 
         // Part 2 : Create the multi material
@@ -152,7 +154,7 @@ export class MapScene {
         planeCount += 1
 
         //Create dynamic texture
-        const texture_HeatMap = new DynamicTexture('No alpha', { width: 2 * halfSize, height: 2 * halfSize }, this._scene, false)
+        const texture_HeatMap = new DynamicTexture('No alpha', { width: 2 * ZhalfSize, height: 2 * XhalfSize }, this._scene, false)
         texture_HeatMap.hasAlpha = true
 
         const material_HeatMap = new StandardMaterial('plane1 material', this._scene)
@@ -172,7 +174,7 @@ export class MapScene {
         material_HeatMap.transparencyMode = Material.MATERIAL_ALPHATEST
         material_HeatMap.alpha = 0.8
 
-        const plane_HeatMap = MeshBuilder.CreatePlane('Assets/Images/heatmap.png', { width: 2 * halfSize, height: 2 * halfSize }, this._scene)
+        const plane_HeatMap = MeshBuilder.CreatePlane('Assets/Images/heatmap.png', { width: 2 * ZhalfSize, height: 2 * XhalfSize }, this._scene)
         plane_HeatMap.rotation = new Vector3(Math.PI / 2, 0, 0)     //  Plane starts in xy plane. Bring into xz plane
         plane_HeatMap.position = new Vector3(0, planeCount * distanceBetweenPlane, 0)
         plane_HeatMap.hasVertexAlpha = true
@@ -194,7 +196,7 @@ export class MapScene {
             hmheight = image_HeatMap.naturalHeight
             hmwidth_text = hmwidth.toString()
             hmheight_text = hmheight.toString()
-            context_HeatMap.drawImage(image_HeatMap, 0, 0, hmwidth, hmheight, 0, 0, 2 * halfSize, 2 * halfSize)
+            context_HeatMap.drawImage(image_HeatMap, 0, 0, hmwidth, hmheight, 0, 0, 2 * ZhalfSize, 2 * XhalfSize)
             texture_HeatMap.update(false)  // false = do not use invertY
         })
 
@@ -202,14 +204,14 @@ export class MapScene {
         // IMAGE PLANE (NO ALPHA)
         planeCount += 1
 
-        const texture_FixedPix = new DynamicTexture('No alpha', { width: 2 * halfSize, height: 2 * halfSize }, this._scene, false)
+        const texture_FixedPix = new DynamicTexture('No alpha', { width: 2 * ZhalfSize, height: 2 * XhalfSize }, this._scene, false)
         texture_FixedPix.hasAlpha = false
 
         const material_FixedPix = new StandardMaterial('mat fixed pix', this._scene)
         material_FixedPix.backFaceCulling = false
         material_FixedPix.diffuseTexture = texture_FixedPix
 
-        const plane_FixedPix = MeshBuilder.CreatePlane('Assets/Images/heatmap.png', { width: 2 * halfSize, height: 2 * halfSize }, this._scene)
+        const plane_FixedPix = MeshBuilder.CreatePlane('Assets/Images/heatmap.png', { width: 2 * ZhalfSize, height: 2 * XhalfSize }, this._scene)
         plane_FixedPix.rotation = new Vector3(Math.PI / 2, 0, 0)
         plane_FixedPix.position = new Vector3(0, planeCount * distanceBetweenPlane, 0)
         plane_FixedPix.material = material_FixedPix
@@ -229,7 +231,7 @@ export class MapScene {
             pixheight = image_FixedPix.naturalHeight
             pixwidth_text = pixwidth.toString()
             pixheight_text = pixheight.toString()
-            context_FixedPix.drawImage(image_FixedPix, 0, 0, pixwidth, pixheight, 0, 0, 2 * halfSize, 2 * halfSize)
+            context_FixedPix.drawImage(image_FixedPix, 0, 0, pixwidth, pixheight, 0, 0, 2 * ZhalfSize, 2 * XhalfSize)
             texture_FixedPix.update(false)  // false = do not use invertY
         })
 
@@ -275,9 +277,9 @@ export class MapScene {
         const plane_Text = MeshBuilder.CreatePlane('plane', { width: planeWidth, height: planeTextHeight }, this._scene)
         plane_Text.rotation = new Vector3(0, -Math.PI / 2, 0)
         plane_Text.position = new Vector3(
-            halfSize,
+            ZhalfSize,
             (planeCount - 1) * distanceBetweenPlane - planeTextHeight / 2,
-            -(halfSize - planeWidth / 2))
+            -(XhalfSize - planeWidth / 2))
         plane_Text.material = material_DynText
 
 
