@@ -121,7 +121,7 @@ module.exports = configure(function (ctx) {
       prodPort: 3000, // The default port that the production server should use
       // (gets superseded if process.env.PORT is specified at runtime)
 
-      maxAge: 1000 * 60 * 60 * 24 * 30,
+      maxAge: 1000 * 60 * 60 * 24 * 30,  // 1 month in milliseconds
       // Tell browser when a file from the server should expire from cache (in ms)
 
       chainWebpackWebserver(/* chain */) {
