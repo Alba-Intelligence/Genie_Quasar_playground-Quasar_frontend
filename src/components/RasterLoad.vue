@@ -1,5 +1,6 @@
 <template>
 <div>
+    <!--
     <h1>Photos</h1>
     <button @click="load">Refresh</button>
 
@@ -18,6 +19,7 @@
 
     <button @click="edit(p.id)">Edit</button>
     <button @click="deletePhoto(p.id)">Delete</button>
+    -->
 </div>
 
 
