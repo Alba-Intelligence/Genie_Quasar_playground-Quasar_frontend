@@ -1,3 +1,17 @@
+<MaterialCardBox
+header="Cat as a Service"
+sub-header="Random Cat Image"
+show-media
+show-actions
+>
+<template
+v-slot:media>
+</template>
+<template v-slot:action>
+</template>
+</MaterialCardBox>
+
+
 <template>
   <q-item clickable tag="a" target="_blank" :href="link">
     <q-item-section v-if="icon" avatar>
@@ -18,7 +32,7 @@
 // This templaate is a generic mini-template that creates the left hand side
 // list of links.
 //
-import { defineComponent } from 'vue';
+import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'EssentialLink',
@@ -28,5 +42,5 @@ export default defineComponent({
     link: { type: String, default: '#' },
     icon: { type: String, default: '' },
   },
-});
+})
 </script>
