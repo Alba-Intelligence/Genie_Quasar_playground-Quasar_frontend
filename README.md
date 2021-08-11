@@ -41,6 +41,19 @@ quasar build
 See [Configuring quasar.conf.js](https://v2.quasar.dev/quasar-cli/quasar-conf-js).
 
 
+# Status
+
+TODO:
+
+- In progress: Axios integreation to source a PlotlyJS object via Julia Genie end points and draw it a Babylon plane
+
+- Make that plane reactive
+
+- Make elements of that plane reactive
+
+- Convert Plotly surface 3d into something that Babylon can handle (heightmap or fully textured/coloured mesh?)
+
+
 # Sources
 
 Vue3 Plotly component: https://github.com/inys/covid-dashboard-js

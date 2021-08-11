@@ -324,6 +324,41 @@ export class MapScene {
             })
         }
 
+
+        // FIXED RASTER SERVED FROM JULIA VIA AXIOS
+        planeCount += 1
+
+        const texture_JuliaContour = new DynamicTexture('No alpha', { width: 2 * ZhalfSize, height: 2 * XhalfSize }, this._scene, false)
+        texture_JuliaContour.hasAlpha = false
+
+        const material_JuliaContour = new StandardMaterial('mat fixed pix', this._scene)
+        material_JuliaContour.backFaceCulling = false
+        material_JuliaContour.diffuseTexture = texture_JuliaContour
+
+        const plane_JuliaContour = MeshBuilder.CreatePlane('Assets/Images/heatmap.png', { width: 2 * ZhalfSize, height: 2 * XhalfSize }, this._scene)
+        plane_JuliaContour.rotation = new Vector3(Math.PI / 2, 0, 0)
+        plane_JuliaContour.position = new Vector3(0, planeCount * distanceBetweenPlane, 0)
+        plane_JuliaContour.material = material_JuliaContour
+
+        const image_JuliaContour = new Image()
+        image_JuliaContour.src = plane_JuliaContour.name
+
+        const context_JuliaContour = texture_JuliaContour.getContext()
+
+        let contourwidth = 0
+        let contourheight = 0
+        // let contourwidth_text = ''
+        // let contourheight_text = ''
+
+        image_JuliaContour.onload = (() => {
+            contourwidth = image_JuliaContour.naturalWidth
+            contourheight = image_JuliaContour.naturalHeight
+            // contourwidth_text = contourwidth.toString()
+            // contourheight_text = contourheight.toString()
+            context_JuliaContour.drawImage(image_JuliaContour, 0, 0, contourwidth, contourheight, 0, 0, 2 * ZhalfSize, 2 * XhalfSize)
+            texture_JuliaContour.update(false)  // false = do not use invertY
+        })
+
         void this._scene.debugLayer.show({
             // embedMode: true,
             showInspector: true,
