@@ -1,17 +1,17 @@
 <template>
-  <div :id="id" v-resize:debounce.100="onResize" />
+  <div :id='id' v-resize:debounce.100='onResize' />
 </template>
 <script>
-import Plotly from "plotly.js";
-import events from "./events.js";
-import methods from "./methods.js";
-import { camelize } from "@/utils/helper";
+import Plotly from 'plotly.js';
+import events from './events.js';
+import methods from './methods.js';
+import { camelize } from './helper.js';
 const directives = {};
-if (typeof window !== "undefined") {
-  directives.resize = require("vue-resize-directive");
+if (typeof window !== 'undefined') {
+  directives.resize = require('vue-resize-directive');
 }
 export default {
-  name: "plotly",
+  name: 'plotly',
   inheritAttrs: false,
   directives,
   props: {
@@ -112,7 +112,7 @@ export default {
     getPrintOptions() {
       const { $el } = this;
       return {
-        format: "png",
+        format: 'png',
         width: $el.clientWidth,
         height: $el.clientHeight
       };

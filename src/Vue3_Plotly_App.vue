@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import Plotly from './components/Plotly.vue';
+import Plotly from './components/Plotly/Plotly.vue';
 import depts from './data/depts2018.js';
 import moment, { min, max } from 'moment';
 
@@ -48,7 +48,7 @@ export default {
   async created() {
     let response = await fetch('https://www.data.gouv.fr/fr/datasets/r/63352e38-d353-4b54-bfd1-f1b3ee1cabd7');
     let data = await response.text();
-    
+
     let rows = data.split('\n').slice(1);
     rows.forEach(row => {
       const cols = row.replaceAll('"','').split(';');
@@ -177,7 +177,7 @@ export default {
       if (toString.call(arr) !== "[object Array]") {
         return false;
       }
-        
+
       var total = 0.0;
       for (let i = 0; i < arr.length; i++) {
         if (isNaN(arr[i])) {
