@@ -239,7 +239,6 @@ export class MapScene {
         //
         // FLOATING TEXT
         //
-        planeCount += 1
         const font_size = 48
         const font_size_text = font_size.toString()
         const font = 'bold ' + font_size_text + 'px Arial'
