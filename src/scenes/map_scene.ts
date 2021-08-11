@@ -178,7 +178,7 @@ export class MapScene {
         plane_HeatMap.rotation = new Vector3(Math.PI / 2, 0, 0)     //  Plane starts in xy plane. Bring into xz plane
         plane_HeatMap.position = new Vector3(0, planeCount * distanceBetweenPlane, 0)
         plane_HeatMap.hasVertexAlpha = true
-        plane_HeatMap.visibility = 0.6
+        plane_HeatMap.visibility = 0.7
         plane_HeatMap.material = material_HeatMap
 
         const image_HeatMap = new Image()

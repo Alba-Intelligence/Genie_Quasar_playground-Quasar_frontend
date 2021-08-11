@@ -1,8 +1,8 @@
 {
-  "name": "indexity_mockup_quasar",
+  "name": "vue3_quasar_genie_plotly_playground",
   "version": "0.0.1",
   "description": "A Quasar Framework app",
-  "productName": "Indexity Mockup Quasar",
+  "productName": "Genie+Vue3+Plotly+Babylon playground / Quasar side",
   "author": "AlbaIntelligence <Alba.Intelligence@gmail.com>",
   "private": true,
   "scripts": {

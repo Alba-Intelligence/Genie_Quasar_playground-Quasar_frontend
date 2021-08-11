@@ -146,8 +146,8 @@ module.exports = configure(function (ctx) {
       },
 
       manifest: {
-        name: 'Indexity Mockup Quasar',
-        short_name: 'Indexity Mockup Quasar',
+        name: 'Genie+Vue3+Plotly+Babylon playground / Quasar side',
+        short_name: 'Playground Quasar side',
         description: 'A Quasar Framework app',
         display: 'standalone',
         orientation: 'portrait',
@@ -213,7 +213,7 @@ module.exports = configure(function (ctx) {
       builder: {
         // https://www.electron.build/configuration/configuration
 
-        appId: 'indexity_mockup_quasar'
+        appId: 'genie_vue3_plotly_babylon_playground__quasar_side'
       },
 
       // "chain" is a webpack-chain object https://github.com/neutrinojs/webpack-chain
