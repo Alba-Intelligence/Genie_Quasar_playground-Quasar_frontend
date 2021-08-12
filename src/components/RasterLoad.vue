@@ -22,9 +22,9 @@
     -->
 </div>
 
-
-<script>
-    <!-- import axios from "axios";
+<!--
+<script lang="ts">
+    import axios from "axios";
     import { API_URL } from "../http/constants";
 
     export default {
@@ -56,10 +56,11 @@
 
         beforeMount() {
             this.load();
-        }, -->
+        },
 </script>
+-->
 
-<style scoped>
+<!-- <style scoped>
     .row {
         display: flex;
         flex-wrap: wrap;
@@ -75,6 +76,6 @@
     .row img {
         width: 100px;
     }
-</style>
+</style> -->
 
 </template>

@@ -21,6 +21,7 @@ export interface StateInterface {
   example: unknown
 }
 
+
 // provide typings for `this.$store`
 declare module '@vue/runtime-core' {
   interface ComponentCustomProperties {
@@ -48,3 +49,4 @@ export default store(function (/* { ssrContext } */) {
 export function useStore() {
   return vuexUseStore(storeKey)
 }
+
