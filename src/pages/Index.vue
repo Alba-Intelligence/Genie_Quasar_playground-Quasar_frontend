@@ -6,10 +6,10 @@
 
 <script lang="ts">
 import { defineComponent, ref, onMounted, onUnmounted } from 'vue'
-
-import { Engine } from '@babylonjs/core'
 import { MapScene } from 'src/scenes/scene_definitions/default_map_scene'
-import { CreateSceneClass, getSceneModuleWithName } from '../scenes/createScene'
+
+// import { Engine } from '@babylonjs/core'
+// import { CreateSceneClass, getSceneModuleWithName } from '../scenes/createScene'
 
 
 export default defineComponent({
@@ -21,12 +21,11 @@ export default defineComponent({
   components: {},
 
   data(){
-    const sceneTmp = ref<MapScene>()
-    myMapScene = setup()
-    return {myMapScene}
+    const myMapScene = this.setup() as MapScene
+    return myMapScene
   },
 
-  async setup(){
+  methods: { async setup(){
     // const   moduleName= 'default_map_scene'
       const GenieServerAddress= '127.0.0.1'
       const GenieServerPort= 9009
@@ -50,11 +49,11 @@ export default defineComponent({
     await myMapScene.initScene().then((response) => response)
     myMapScene.startScene()
 
-    return {myMapScene}
+    return myMapScene
   },
 
   onMounted(){
-    window.addEventListener('resize', this.onWindowResize)
+    window.addEventListener('resize', this._engine.onWindowResize)
   },
 
   onUnmounted(){
@@ -63,7 +62,7 @@ export default defineComponent({
 
   onWindowResize() {
     this._engine.resize()
-  },
+  },}
 })
 
 </script>
