@@ -9,37 +9,48 @@ import { MeshBuilder } from '@babylonjs/core/Meshes/meshBuilder'
 import { DynamicTexture } from '@babylonjs/core/Materials/Textures/dynamicTexture'
 import { StandardMaterial } from '@babylonjs/core/Materials/standardMaterial'
 
-// import { Inspector } from '@babylonjs/inspector'
-// import { SampleMaterial } from 'src/Assets/Materials/SampleMaterial'
+import { CreateSceneClass } from '../createScene'
+// import axios from 'src/boot/axios'
 
-export class MapScene {
+export class MapScene implements CreateSceneClass {
 
     private _scene: Scene
     private _engine: Engine
+    private _genieServerAddress: string
+    private _genieServerPort: number
 
     public getEngine() {
         return this._engine
     }
 
-    constructor(private _canvas: HTMLCanvasElement, genieServerAddress: string, genieServerPort: number) {
-        this._engine = this.createEngine(_canvas)
-        this._scene = this.createScene(this._engine)
+    constructor(
+        private canvas: HTMLCanvasElement, genieServerAddress: string, genieServerPort: number
+    ) {
+        this._engine = this.generateEngine(canvas)
+        this._scene = this.generateScene(this._engine)
 
         this._genieServerAddress = genieServerAddress
         this._genieServerPort = genieServerPort
+
+        void this.initScene()
+        return this
     }
 
-    createEngine(canvas: HTMLCanvasElement) {
+    generateEngine(
+        canvas: HTMLCanvasElement
+    ) {
         const engine = new Engine(canvas);
         return engine;
     }
 
-    createScene(engine: Engine) {
+    generateScene(
+        engine: Engine
+    ) {
         const scene = new Scene(engine);
         return scene;
     }
 
-    async public initScene(cameraControlCanvas?: HTMLCanvasElement) {
+    initScene = (async (): Promise<MapScene> => {
         //
         // Create a basic BJS Scene object.
         //
@@ -47,7 +58,7 @@ export class MapScene {
         camera.position = new Vector3(150, 100, 0)
 
         // Attach the camera to the canvas.
-        const canvas = cameraControlCanvas ?? this._engine.getRenderingCanvas();
+        const canvas = this._engine.getRenderingCanvas();
         camera.attachControl(canvas, true)
 
         // Create a basic light, aiming 0,1,0 - meaning, to the sky.
@@ -90,14 +101,7 @@ export class MapScene {
         tiledGround_GroundMap.rotation = new Vector3(0, -Math.PI / 2, 0)
 
 
-        // Part 2 : Create the multi material
-        // Create differents materials
-        // const whiteMaterial = new StandardMaterial('White', this._scene)
-        // whiteMaterial.diffuseColor = new Color3(1, 1, 1)
-
-        // const blackMaterial = new StandardMaterial('Black', this._scene)
-        // blackMaterial.diffuseColor = new Color3(0, 0, 0)
-
+        // Part 2 : Create the multi material// import { Inspector } from '@babylonjs/inspector'
         // Create Multi Material
         const material_GroundMap = new MultiMaterial('multi', this._scene)
         const zoom = 12 as unknown as string
@@ -168,12 +172,12 @@ export class MapScene {
         // materialPlane1.needDepthPrePass = true
         // materialPlane1.separateCullingPass = true
 
+        // for transparencyMode constants, see https://playground.babylonjs.com/#TMDNDM
         // 'null' = null
         // 'Opaque' = 0 Material.MATERIAL_OPAQUE
         // 'Alpha Test' = 1 Material.MATERIAL_ALPHATEST
         // 'Alpha Blend'=  2 Material.MATERIAL_ALPHABLEND
         // 'Alpha Test + Blend' = 3 Material.MATERIAL_ALPHATESTANDBLEND
-        // See https://playground.babylonjs.com/#TMDNDM
         material_HeatMap.transparencyMode = Material.MATERIAL_ALPHATEST
         material_HeatMap.alpha = 0.8
 
@@ -339,6 +343,10 @@ export class MapScene {
         material_JuliaContour.diffuseTexture = texture_JuliaContour
 
         // use genieServerAddress and genieServerPort to connect to the Julia server
+        // This definition of a as a prromise is just to keep the 'async without await' error message quiet...
+        const API = 'http://$(this._genieServerAddress):$(this._genieServerPort)/randomimage'
+        const img = await fetch(API)
+
         const plane_JuliaContour = MeshBuilder.CreatePlane('Assets/Images/heatmap.png', { width: 2 * ZhalfSize, height: 2 * XhalfSize }, this._scene)
         plane_JuliaContour.rotation = new Vector3(Math.PI / 2, 0, 0)
         plane_JuliaContour.position = new Vector3(0, planeCount * distanceBetweenPlane, 0)
@@ -369,8 +377,8 @@ export class MapScene {
             // overlay: true,
             showExplorer: true
         })
-
-    }
+        return this
+    })
 
     public startScene() {
         this.setupRenderLoop();
@@ -382,3 +390,5 @@ export class MapScene {
         });
     }
 }
+
+// export default new MapScene(babylonCanvas, GenieServerAddress, GenieServerPort)

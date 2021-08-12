@@ -22,6 +22,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Part of the code is inspired by:
 https://github.com/inys/covid-dashboard-js under MIT License
 https://github.com/PacktPublishing/-Vue.js-3-By-Example under MIT License
+https://github.com/RaananW/babylonjs-webpack-es6 under Apache 2.0 License
 
 
 https://altrim.io/posts/axios-http-client-using-typescript
