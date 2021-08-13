@@ -1,4 +1,5 @@
 import { store } from 'quasar/wrappers'
+import { babylonInit } from 'src/scenes'
 import { InjectionKey } from 'vue'
 import { createStore, Store as VuexStore, useStore as vuexUseStore, } from 'vuex'
 
@@ -35,6 +36,7 @@ export const storeKey: InjectionKey<VuexStore<StateInterface>> = Symbol('vuex-ke
 export default store(function (/* { ssrContext } */) {
   const Store = createStore<StateInterface>({
     modules: {
+      babylonModule
       // example
     },
 

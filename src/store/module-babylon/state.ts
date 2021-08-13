@@ -1,10 +1,10 @@
 export interface BabylonStateInterface {
-  prop: boolean;
+  randomStateVariable: boolean;
 }
 
 function state(): BabylonStateInterface {
   return {
-    prop: false
+    randomStateVariable: false
   }
 };
 

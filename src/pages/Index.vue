@@ -15,7 +15,7 @@ export default defineComponent({
     let engine: Engine;
     onMounted(() => {
       if (bjsCanvas?.value) {
-        const myMapScene = new MapScene(bjsCanvas.value);
+        const myMapScene = new MapScene(bjsCanvas.value, '127.0.0.1', 9009);
         engine = myMapScene.getEngine();
         myMapScene.initScene();
         myMapScene.startScene();

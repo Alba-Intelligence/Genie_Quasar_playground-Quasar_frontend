@@ -11,14 +11,15 @@ import { MapScene } from 'src/scenes/scene_definitions/default_map_scene'
 // import { Engine } from '@babylonjs/core'
 // import { CreateSceneClass, getSceneModuleWithName } from '../scenes/createScene'
 
+const genieServerAddress: '127.0.0.1'
+const genieServerPort: 9009
+
 export default defineComponent({
     name: 'MapMockup',
 
     components: {},
 
     data() {
-        const genieServerAddress: '127.0.0.1'
-        const genieServerPort: 9009
 
         const myMapScene = this.setup(genieServerAddress, genieServerPort) as MapScene
         return {

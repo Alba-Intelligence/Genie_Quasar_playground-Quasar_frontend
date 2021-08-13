@@ -1,12 +1,12 @@
-import Plotly from 'plotly.js';
+import Plotly from 'plotly.js'
 
-const plotlyFunctions = ['restyle', 'relayout', 'update', 'addTraces', 'deleteTraces', 'moveTraces', 'extendTraces', 'prependTraces', 'purge'];
+const plotlyFunctions = ['restyle', 'relayout', 'update', 'addTraces', 'deleteTraces', 'moveTraces', 'extendTraces', 'prependTraces', 'purge']
 
 const methods = plotlyFunctions.reduce((all, functionName) => {
     all[functionName] = function (...args) {
-        return Plotly[functionName].apply(Plotly, [this.$el, ...args]);
+        return Plotly[functionName].apply(Plotly, [this.$el, ...args])
     };
-    return all;
+    return all
 }, {});
 
-export default methods;
+export default methods

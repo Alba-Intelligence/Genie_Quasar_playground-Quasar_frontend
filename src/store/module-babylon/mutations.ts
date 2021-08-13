@@ -1,10 +1,13 @@
 import { MutationTree } from 'vuex';
 import { BabylonStateInterface } from './state';
 
-const mutation: MutationTree<BabylonStateInterface> = {
-  someMutation(/* state: BabylonStateInterface */) {
-    // your code
-  }
-};
+function updateRandomState(
+  state: BabylonStateInterface,
+  opened: boolean
+): MutationTree<BabylonStateInterface> {
+  state.randomStateVariable = opened
+  const returnValue: MutationTree<BabylonStateInterface> = null
+  return returnValue
+}
 
-export default mutation;
+export default updateRandomState

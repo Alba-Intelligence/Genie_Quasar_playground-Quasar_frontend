@@ -4,7 +4,7 @@
 </div>
 
 <script lang="ts">
-    import { getHttp } from './http/baseFetch'
+    import { getHttp } from '../api/http/baseFetch'
 </script>
 
 </template>

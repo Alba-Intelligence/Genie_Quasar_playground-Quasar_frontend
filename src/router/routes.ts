@@ -1,5 +1,9 @@
-import { RouteRecordRaw } from 'vue-router';
+import RouteRecordRaw from 'vue-router'
 
+//
+// Lazy-loading of the routes by Quasar
+// see: https://quasar.dev/quasar-cli/lazy-loading
+//
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
@@ -13,6 +17,6 @@ const routes: RouteRecordRaw[] = [
     path: '/:catchAll(.*)*',
     component: () => import('pages/Error404.vue'),
   },
-];
+]
 
-export default routes;
+export default routes
