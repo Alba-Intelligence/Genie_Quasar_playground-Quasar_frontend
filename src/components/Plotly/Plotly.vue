@@ -1,7 +1,8 @@
 <template>
   <div :id='id' v-resize:debounce.100='onResize' />
 </template>
-<script>
+
+<script lang="ts">
 import Plotly from 'plotly.js';
 import events from './events.js';
 import methods from './methods.js';

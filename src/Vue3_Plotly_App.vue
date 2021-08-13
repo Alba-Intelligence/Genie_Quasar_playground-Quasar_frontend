@@ -27,7 +27,7 @@
   </section>
 </template>
 
-<script>
+<script lang="ts">
 import Plotly from './components/Plotly/Plotly.vue';
 import depts from './data/depts2018.js';
 import moment, { min, max } from 'moment';
