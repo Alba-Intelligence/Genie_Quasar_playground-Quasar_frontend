@@ -1,68 +1,47 @@
 <template>
   <q-page class="row items-center justify-evenly">
-    <canvas ref="babylonCanvas" class="full-width full-height" />
+    <example-component title="Example component" active :todos="todos" :meta="meta"></example-component>
   </q-page>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, onMounted, onUnmounted } from 'vue'
-import { MapScene } from 'src/scenes/scene_definitions/default_map_scene'
-
-// import { Engine } from '@babylonjs/core'
-// import { CreateSceneClass, getSceneModuleWithName } from '../scenes/createScene'
-
+import { Todo, Meta } from 'components/models'
+import ExampleComponent from 'components/CompositionComponent.vue'
+import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
-  name: 'MapMockup',
-  moduleName: 'default_map_scene',
-  GenieServerAddress: '127.0.0.1',
-  GenieServerPort: 9009,
+  name: 'PageIndex',
 
-  components: {},
+  components: { ExampleComponent },
 
-  data(){
-    const myMapScene = this.setup() as MapScene
-    return myMapScene
-  },
+  setup() {
+    const todos = ref<Todo[]>([
+      {
+        id: 1,
+        content: 'ct1'
+      },
+      {
+        id: 2,
+        content: 'ct2'
+      },
+      {
+        id: 3,
+        content: 'ct3'
+      },
+      {
+        id: 4,
+        content: 'ct4'
+      },
+      {
+        id: 5,
+        content: 'ct5'
+      }
+    ])
+    const meta = ref<Meta>({
+      totalCount: 1200
+    })
+    return { todos, meta }
+  }
 
-  methods: { async setup(){
-    // const   moduleName= 'default_map_scene'
-      const GenieServerAddress= '127.0.0.1'
-      const GenieServerPort= 9009
-
-
-    // const _resultcanvas = await new Promise<HTMLCanvasElement> ( () => {
-    // Genie server access
-    // const getModuleToLoad = (): string | undefined => location.search.split('scene=')[1]
-
-    // get the module to load
-    // const createSceneModule = await getSceneModuleWithName(moduleName)
-
-    // Execute the pretasks, if defined
-    // await Promise.all(createSceneModule.preTasks || [])
-
-    // Address the possibility that null is returned to make eslint happy.
-    // const babylonCanvas = ref<HTMLCanvasElement | null>(null)
-    const babylonCanvas = document.getElementById('renderCanvas') as HTMLCanvasElement
-    const myMapScene =  new MapScene(babylonCanvas, GenieServerAddress, GenieServerPort)
-
-    await myMapScene.initScene().then((response) => response)
-    myMapScene.startScene()
-
-    return myMapScene
-  },
-
-  onMounted(){
-    window.addEventListener('resize', this._engine.onWindowResize)
-  },
-
-  onUnmounted(){
-    window.removeEventListener('resize', this.onWindowResize)
-  },
-
-  onWindowResize() {
-    this._engine.resize()
-  },}
 })
-
 </script>
