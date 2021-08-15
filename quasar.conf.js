@@ -28,7 +28,10 @@ module.exports = configure(function (ctx) {
     // app boot file (/src/boot)
     // --> boot files are part of "main.js"
     // https://v2.quasar.dev/quasar-cli/boot-files
-    boot: ['i18n', 'axios'],
+    boot: [
+      'i18n',
+      'axios'
+    ],
 
     // https://v2.quasar.dev/quasar-cli/quasar-conf-js#Property%3A-css
     css: ['app.scss'],
@@ -75,21 +78,29 @@ module.exports = configure(function (ctx) {
     },
 
     // Full list of options: https://v2.quasar.dev/quasar-cli/quasar-conf-js#Property%3A-devServer
-    // devServer: {
-    //   https: false,
-    //   port: 9001,
-    //   open: false // opens browser window automatically
-    // },
+    //
+    // ------------------------------------------------------------------------------------------------------
+    // ------------------------------------------------------------------------------------------------------
     //
     // WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING
+    //
+    // ------------------------------------------------------------------------------------------------------
+    // ------------------------------------------------------------------------------------------------------
     //
     // The dev server is trying to use an API proxy when running in a Dev environment
     //
     // Docs in https://quasar.dev/quasar-cli/api-proxying and
     //
     //
-
     devServer: {
+
+      // Details of the development server itself
+      https: false,
+      port: 8999,
+      open: false, // opens browser window automatically
+
+      // Define proxies.
+      // Here we only proxy the access to the Genie API
       proxy: {
         // proxy all requests starting with /genie_api to jsonplaceholder
         // String at the beginning of the route
@@ -153,8 +164,8 @@ module.exports = configure(function (ctx) {
 
     // https://v2.quasar.dev/quasar-cli/developing-pwa/configuring-pwa
     pwa: {
-      workboxPluginMode: 'GenerateSW', // 'GenerateSW' or 'InjectManifest'
-      workboxOptions: {}, // only for GenerateSW
+      workboxPluginMode: 'GenerateSW',          // 'GenerateSW' or 'InjectManifest'
+      workboxOptions: {},                       // only for GenerateSW
 
       // for the custom service worker ONLY (/src-pwa/custom-service-worker.[js|ts])
       // if using workbox in InjectManifest mode

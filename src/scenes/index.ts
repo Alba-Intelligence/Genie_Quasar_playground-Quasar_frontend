@@ -18,12 +18,11 @@ export const babylonInit = async (genieServerAddress: string, genieServerPort: n
 
     // Create the scene
     // const scene = await createSceneModule.generateScene(canvas, genieServerAddress, genieServerPort)
-    const scene = await createSceneModule.generateScene(canvas, genieServerAddress, genieServerPort)
+    const scene = await createSceneModule.initScene(canvas, genieServerAddress, genieServerPort)
+
 
     // Register a render loop to repeatedly render the scene
-    engine.runRenderLoop(function () {
-        scene.render()
-    })
+    scene.setupRenderLoop()
 
     // Watch for browser/canvas resize events
     window.addEventListener('resize', function () {

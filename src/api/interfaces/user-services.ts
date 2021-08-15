@@ -2,7 +2,7 @@
 // From https://altrim.io/posts/axios-http-client-using-typescript
 
 
-import { http } from './http'
+import { http } from './axios_http_API_end_point'
 
 export type User = {
     id: string

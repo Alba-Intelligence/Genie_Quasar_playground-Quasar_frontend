@@ -27,7 +27,6 @@
     "@babel/core": "^7.15.0",
     "@babel/eslint-parser": "^7.13.14",
     "@quasar/app": ">=3.0.0",
-    "@types/moment": "^2.13.0",
     "@types/node": "^10.17.15",
     "@types/plotly.js": "^1.54.14",
     "@typescript-eslint/eslint-plugin": "^4.16.1",

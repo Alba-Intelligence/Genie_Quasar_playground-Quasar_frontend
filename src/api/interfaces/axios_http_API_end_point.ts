@@ -33,15 +33,15 @@ const headers: Readonly<Record<string, string | boolean>> = {
 //     }
 // }
 
-class Http {
+class AxiosHttpAPIEndPoint {
     private instance: AxiosInstance | null = null
 
-    private get http(): AxiosInstance {
-        return this.instance != null ? this.instance : this.initHttp()
+    private get axiosHttpAPIInstance(): AxiosInstance {
+        return this.instance != null ? this.instance : this.initAxiosHttpAPIInstance()
     }
 
-    initHttp() {
-        const http = axios.create({
+    initAxiosHttpAPIInstance() {
+        const axiosHttpAPIEndPoint = axios.create({
             baseURL: 'http://127.0.0.1:9009/',
             headers,
             withCredentials: false,
@@ -57,16 +57,16 @@ class Http {
         //     }
         // )
 
-        this.instance = http
-        return http
+        this.instance = axiosHttpAPIEndPoint
+        return axiosHttpAPIEndPoint
     }
 
     request<T = any, R = AxiosResponse<T>>(config: AxiosRequestConfig): Promise<R> {
-        return this.http.request(config)
+        return this.axiosHttpAPIInstance.request(config)
     }
 
     get<T = any, R = AxiosResponse<T>>(url: string, config?: AxiosRequestConfig): Promise<R> {
-        return this.http.get<T, R>(url, config)
+        return this.axiosHttpAPIInstance.get<T, R>(url, config)
     }
 
     post<T = any, R = AxiosResponse<T>>(
@@ -74,7 +74,7 @@ class Http {
         data?: T,
         config?: AxiosRequestConfig
     ): Promise<R> {
-        return this.http.post<T, R>(url, data, config)
+        return this.axiosHttpAPIInstance.post<T, R>(url, data, config)
     }
 
     put<T = any, R = AxiosResponse<T>>(
@@ -82,16 +82,16 @@ class Http {
         data?: T,
         config?: AxiosRequestConfig
     ): Promise<R> {
-        return this.http.put<T, R>(url, data, config)
+        return this.axiosHttpAPIInstance.put<T, R>(url, data, config)
     }
 
     delete<T = any, R = AxiosResponse<T>>(url: string, config?: AxiosRequestConfig): Promise<R> {
-        return this.http.delete<T, R>(url, config)
+        return this.axiosHttpAPIInstance.delete<T, R>(url, config)
     }
 
     // Handle global app errors
     // We can handle generic app errors depending on the status code
-    private handleError(error) {
+    private handleError(error: any) {
         const { status } = error
 
         switch (status) {
@@ -117,4 +117,5 @@ class Http {
     }
 }
 
-export const http = new Http()
+export const axiosHttpAPIEndPoint = new AxiosHttpAPIEndPoint()
+
