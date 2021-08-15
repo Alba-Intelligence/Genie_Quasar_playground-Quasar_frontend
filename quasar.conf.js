@@ -17,10 +17,7 @@ module.exports = configure(function (ctx) {
       tsCheckerConfig: {
         eslint: {
           enabled: true,
-          files:
-            [
-              './src/**/*.{ts,tsx,js,jsx,vue}',
-            ]
+          files: './src/**/*.{ts,tsx,js,jsx,vue}',
         },
       }
     },
@@ -77,16 +74,35 @@ module.exports = configure(function (ctx) {
 
       // https://v2.quasar.dev/quasar-cli/handling-webpack
       // "chain" is a webpack-chain object https://github.com/neutrinojs/webpack-chain
-      chainWebpack(/* chain */) {
+      chainWebpack (/* chain */) {
         //
       },
     },
 
     // Full list of options: https://v2.quasar.dev/quasar-cli/quasar-conf-js#Property%3A-devServer
     devServer: {
+
+      // Details of the development server itself
       https: false,
       port: 9001,
-      open: false // opens browser window automatically
+      open: false, // opens browser window automatically
+
+      // Define proxies.
+      // Here we only proxy the access to the Genie API local server
+      proxy: {
+        // proxy all requests starting with /genie_api to jsonplaceholder
+        // String at the beginning of the route
+        '/genie_api': {
+          target: 'http://127.0.0.1:9009',
+
+          // String replacement. The beginning of the route as a regex (see the ^) is here replaced by an empty string.
+          // requests to /genie_api/blabla/1 to http://127.0.0.1:9009/blabla/1
+          changeOrigin: true,
+          pathRewrite: {
+            '^/genie_api': '',
+          },
+        },
+      },
     },
 
     // https://v2.quasar.dev/quasar-cli/quasar-conf-js#Property%3A-framework
@@ -119,12 +135,12 @@ module.exports = configure(function (ctx) {
       // manualPostHydrationTrigger: true,
 
       prodPort: 3000, // The default port that the production server should use
-      // (gets superseded if process.env.PORT is specified at runtime)
+                      // (gets superseded if process.env.PORT is specified at runtime)
 
-      maxAge: 1000 * 60 * 60 * 24 * 30,  // 1 month in milliseconds
-      // Tell browser when a file from the server should expire from cache (in ms)
+      maxAge: 1000 * 60 * 60 * 24 * 30,
+        // Tell browser when a file from the server should expire from cache (in ms)
 
-      chainWebpackWebserver(/* chain */) {
+      chainWebpackWebserver (/* chain */) {
         //
       },
 
@@ -141,14 +157,14 @@ module.exports = configure(function (ctx) {
 
       // for the custom service worker ONLY (/src-pwa/custom-service-worker.[js|ts])
       // if using workbox in InjectManifest mode
-      chainWebpackCustomSW(/* chain */) {
+      chainWebpackCustomSW (/* chain */) {
         //
       },
 
       manifest: {
-        name: 'Genie+Vue3+Plotly+Babylon playground / Quasar side',
-        short_name: 'Playground Quasar side',
-        description: 'A Quasar Framework app',
+        name: 'Genie Quasar Playground - Quasar side',
+        short_name: 'Genie Quasar Playground - Quasar side',
+        description: 'Genie Quasar Playground - Quasar side',
         display: 'standalone',
         orientation: 'portrait',
         background_color: '#ffffff',
@@ -213,17 +229,17 @@ module.exports = configure(function (ctx) {
       builder: {
         // https://www.electron.build/configuration/configuration
 
-        appId: 'genie_vue3_plotly_babylon_playground__quasar_side'
+        appId: 'genie_quasar_playground__quasar'
       },
 
       // "chain" is a webpack-chain object https://github.com/neutrinojs/webpack-chain
-      chainWebpack(/* chain */) {
+      chainWebpack (/* chain */) {
         // do something with the Electron main process Webpack cfg
         // extendWebpackMain also available besides this chainWebpackMain
       },
 
       // "chain" is a webpack-chain object https://github.com/neutrinojs/webpack-chain
-      chainWebpackPreload(/* chain */) {
+      chainWebpackPreload (/* chain */) {
         // do something with the Electron main process Webpack cfg
         // extendWebpackPreload also available besides this chainWebpackPreload
       },

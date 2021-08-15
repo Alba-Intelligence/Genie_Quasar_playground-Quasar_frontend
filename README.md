@@ -1,59 +1,26 @@
-# Genie+Vue3+Plotly+Babylon playground / Quasar side
+# Genie Quasar Playground - Quasar side (genie_quasar_playground__quasar)
 
-This repo is a playground of mixing Vue3 / Babylon as packaged by `Quasar`, along with Julia `Genie.jl` REST API end points delivering `PlotlyJS` plots.
-
-This is to be used with the partner repo `Genie_Vue3_Plotly_Babylon_playground__Genie_side`
-
-
-### Start the app in development mode (hot-code reloading, error reporting, etc.)
-
-Install Quasar if not yet done (as `sudo` if necessary):
-
-```bash
-npm -g install @quasar/cli
-```
+Genie Quasar Playground - Quasar side
 
 ## Install the dependencies
 ```bash
-yarn install
+yarn
 ```
 
-
-## Run the development server
-
-From a terminal tabe, run
-
+### Start the app in development mode (hot-code reloading, error reporting, etc.)
 ```bash
 quasar dev
 ```
 
-The site will be served on the port specified in `./quasar.conf.js` line c.87, which is currently 9001.
-
+### Lint the files
+```bash
+yarn run lint
+```
 
 ### Build the app for production
 ```bash
 quasar build
 ```
 
-
 ### Customize the configuration
-
 See [Configuring quasar.conf.js](https://v2.quasar.dev/quasar-cli/quasar-conf-js).
-
-
-# Status
-
-TODO:
-
-- In progress: Axios integreation to source a PlotlyJS object via Julia Genie end points and draw it a Babylon plane
-
-- Make that plane reactive
-
-- Make elements of that plane reactive
-
-- Convert Plotly surface 3d into something that Babylon can handle (heightmap or fully textured/coloured mesh?)
-
-
-# Sources
-
-Vue3 Plotly component: https://github.com/inys/covid-dashboard-js
